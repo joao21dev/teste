@@ -23,6 +23,8 @@ import { useTable, useSortBy, useGlobalFilter } from "react-table";
 import React, { useEffect, useMemo, useState } from "react";
 import axios from "axios";
 import { GlobalFilter } from "../GlobalFilter/globalFilter";
+import Link from "next/link";
+import { BsEye } from "react-icons/bs";
 
 const RolesList = () => {
   const [data, setData] = useState([]);
@@ -99,18 +101,22 @@ const RolesList = () => {
         },
       },
       {
-        id: "gdqfgdkg",
+        id: "gdffqfgdkg",
         width: 25,
         Cell: ({ row }: any) => {
           return <h1></h1>;
         },
       },
+
       {
-        id: "33",
-        Cell: (props: any) => (
-          <Box display="flex" justifyContent="space-around">
-            <BiDotsVerticalRounded fontSize="26px" color={"gray"} />
+        id: "2",
+        Cell: ({ row }: any) => (
+          <Box cursor="pointer">
+            <Link href={`role/${row.index + 1}`}>
+              <BsEye fontSize="26px" color={"gray"} />
+            </Link>
           </Box>
+
           // props.cell.row.cells[4].value
         ),
       },

@@ -23,7 +23,9 @@ import React, { useEffect, useMemo, useState } from "react";
 import axios from "axios";
 import { GlobalFilter } from "../GlobalFilter/globalFilter";
 import { BiDotsVerticalRounded } from "react-icons/bi";
+import { BsEye, BsTrash } from "react-icons/bs";
 import EmployeeInfo from "../EmployeeInfo/employeeInfo";
+import Link from "next/link";
 
 const EmployeesList = () => {
   const [data, setData] = useState([]);
@@ -54,13 +56,17 @@ const EmployeesList = () => {
   const columns = React.useMemo(
     () => [
       {
+        Header: "ID",
+        accessor: "agent_id",
+      },
+      {
         Header: "Nome Completo",
         accessor: "name",
         Cell: (props: any) => (
           <Flex>
             <Center>
               <Avatar size={"sm"} src={props.row.original.image} />
-              <Text ml={2}>{props.cell.row.cells[0].value}</Text>
+              <Text ml={2}>{props.cell.row.cells[1].value}</Text>
             </Center>
           </Flex>
 
@@ -99,21 +105,32 @@ const EmployeesList = () => {
         ),
       },
       {
-        id: "33",
-        Cell: (props: any) => (
+        id: "1",
+        Cell: () => (
           <>
-            {renderEmployeeInfo ? (
-              <EmployeeInfo />
-            ) : (
-              <Box
-                onClick={() => setRenderEmployeeInfo(!renderEmployeeInfo)}
-                display="flex"
-                justifyContent="space-around"
-              >
-                <BiDotsVerticalRounded fontSize="26px" color={"gray"} />
-              </Box>
-            )}
+            <Box
+              onClick={() => setRenderEmployeeInfo(!renderEmployeeInfo)}
+              display="flex"
+              justifyContent="space-around"
+            >
+              <BsTrash fontSize="26px" color={"gray"} />
+            </Box>
           </>
+
+          // props.cell.row.cells[4].value
+        ),
+      },
+      {
+        id: "2",
+        Cell: (props: any) => (
+          <Box cursor="pointer">
+            <Link
+              onClick={() => setRenderEmployeeInfo(!renderEmployeeInfo)}
+              href={`/${props.cell.row.cells[0].value}`}
+            >
+              <BsEye fontSize="26px" color={"gray"} />
+            </Link>
+          </Box>
 
           // props.cell.row.cells[4].value
         ),

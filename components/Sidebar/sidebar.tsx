@@ -24,6 +24,7 @@ import {
   Input,
   Stack,
   InputGroup,
+  Avatar,
 } from "@chakra-ui/react";
 import {
   FiHome,
@@ -54,7 +55,7 @@ export default function SidebarWithHeader({
           throw new Error("Function not implemented.");
         }}
       />
-      <Box ml={{ base: 0, md: '216px'  }} px="20">
+      <Box ml={{ base: 0, md: "216px" }} px="20">
         {children}
       </Box>
     </Box>
@@ -85,8 +86,25 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
         px={{ base: 4, md: 4 }}
         height="61px"
         alignItems="center"
-        justifyContent={{ base: "space-between" }}
-      ></Flex>
+        justifyContent={{ base: "flex-end" }}
+      >
+        {" "}
+        <HStack spacing={{ base: "0", md: "6" }}>
+          <Flex alignItems={"center"}>
+            <Flex m={8}>
+              <Avatar mt={2} size="sm" />
+              <Box ml={3}>
+                <Text fontSize="14px" fontWeight={600}>
+                  João Pedro
+                </Text>
+                <Text fontSize="12px" fontWeight={500}>
+                  Meus dados
+                </Text>
+              </Box>
+            </Flex>
+          </Flex>
+        </HStack>
+      </Flex>
     </>
   );
 };
